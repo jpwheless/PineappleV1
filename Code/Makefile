@@ -11,7 +11,6 @@
 # 4. This file is then uploaded to the Teensy using Teensyloader.
 
 
-
 # The name of your project (used to name the compiled .hex file)
 TARGET = main
 
@@ -28,43 +27,44 @@ OPTIONS += -D__MK20DX256__ -DARDUINO=10600 -DTEENSYDUINO=121
 #************************************************************************
 
 
-
 # Path location for Teensy Loader, teensy_post_compile and teensy_reboot
 # Operating system detection selectes the appropriate  build folder here.
+
+MAINPATH = C:/teensy3build
 
 # Object files to be cleaned on 'make clean'
 RMOBJECTS := *.o *.d $(TARGET).elf $(TARGET).hex
 
 # Execute the python script to configure the build directory
-PYTHONSCRIPT :=  python ../config.py
+PYTHONSCRIPT :=  python $(MAINPATH)/config.py
 BLANK := $(shell $(PYTHONSCRIPT))
 
 ifeq ($(OS),Windows_NT)
 	RMCMD = del
 	MYDIR = echo %cd%
-    TOOLSPATH = ../tools_win
-    # path location for the arm-none-eabi compiler
-    COMPILERPATH = $(TOOLSPATH)/arm-none-eabi/bin
+		TOOLSPATH = $(MAINPATH)/tools_win
+		# path location for the arm-none-eabi compiler
+		COMPILERPATH = $(TOOLSPATH)/arm-none-eabi/bin
 else
 	RMCMD = rm
-    UNAME_S := $(shell uname -s)
-    MYDIR = pwd
-    ifeq ($(UNAME_S),Linux)
-    	UNAME_P := $(shell uname -p)
-    	ifeq ($(UNAME_P),x86_64)
-        	TOOLSPATH = ../tools_linux
-        	COMPILERPATH = $(TOOLSPATH)/arm-none-eabi/bin
-        endif
-    endif
-    ifeq ($(UNAME_S),Darwin)
-        TOOLSPATH = ../tools_mac
-        COMPILERPATH = $(TOOLSPATH)/arm-none-eabi/bin
-    endif
+		UNAME_S := $(shell uname -s)
+		MYDIR = pwd
+		ifeq ($(UNAME_S),Linux)
+			UNAME_P := $(shell uname -p)
+			ifeq ($(UNAME_P),x86_64)
+					TOOLSPATH = $(MAINPATH)/tools_linux
+					COMPILERPATH = $(TOOLSPATH)/arm-none-eabi/bin
+				endif
+		endif
+		ifeq ($(UNAME_S),Darwin)
+				TOOLSPATH = $(MAINPATH)/tools_mac
+				COMPILERPATH = $(TOOLSPATH)/arm-none-eabi/bin
+		endif
 endif
 
-BUILDPATH = ../build
+BUILDPATH = $(MAINPATH)/build
 
-
+LIBPATH = $(MAINPATH)/libraries
 
 
 #************************************************************************
@@ -72,7 +72,10 @@ BUILDPATH = ../build
 #************************************************************************
 
 # CPPFLAGS = compiler options for C and C++
-CPPFLAGS = -Wall -g -Os -mcpu=cortex-m4 -mthumb -nostdlib -MMD $(OPTIONS) -I. -I$(BUILDPATH)/
+CPPFLAGS = -Wall -g -Os -mcpu=cortex-m4 -mthumb -nostdlib -MMD $(OPTIONS) -I. -I$(BUILDPATH) -I$(LIBPATH)
+CPPFLAGS += -I$(LIBPATH)/SdFat
+CPPFLAGS += -I$(LIBPATH)/EEPROM
+CPPFLAGS += -I$(LIBPATH)/i2c_t3
 
 # compiler options for C++ only
 CXXFLAGS = -std=gnu++0x -felide-constructors -fno-exceptions -fno-rtti
@@ -96,10 +99,10 @@ SIZE = $(abspath $(COMPILERPATH))/arm-none-eabi-size
 
 # All the source file names BUILDPATH are gathered
 C_FILES := $(wildcard *.c) \
-	      $(wildcard $(addprefix $(BUILDPATH)/, *.c)) \
+	$(wildcard $(addprefix $(BUILDPATH)/, *.c)) \
 
 CPP_FILES := $(wildcard *.cpp) \
-		  $(wildcard $(addprefix $(BUILDPATH)/, *.cpp)) \
+	$(wildcard $(addprefix $(BUILDPATH)/, *.cpp)) \
 
 OBJS := $(C_FILES:.c=.o) $(CPP_FILES:.cpp=.o)
 
