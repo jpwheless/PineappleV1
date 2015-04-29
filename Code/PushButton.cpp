@@ -1,3 +1,6 @@
+#include <Arduino.h>
+#include "Pushbutton.h"
+
 void PushButton::init(unsigned int pin, bool stateFlip, unsigned int debounceTime) {
 	this->pin = pin;
 	this->stateFlip = stateFlip;

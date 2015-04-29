@@ -1,3 +1,6 @@
+#include <Arduino.h>
+#include "Rainbow.h"
+
 void Rainbow::init(RGBinterface *rgb) {
 	this->rgb = rgb;
 	active = false;

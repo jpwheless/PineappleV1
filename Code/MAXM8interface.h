@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Arduino.h>
 #include "gpsConfig.h"
 
 #define PUBX00_TIME		2		// (float)	hhmmss.ss

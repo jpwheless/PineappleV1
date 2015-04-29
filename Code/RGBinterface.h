@@ -1,5 +1,7 @@
 #pragma once
 
+#include <Arduino.h>
+
 #define RED 					255,0,0
 #define ORANGE  			255,127,0
 #define YELLOW 				255,255,0
@@ -7,6 +9,8 @@
 #define CYAN					0,255,255
 #define BLUE 					0,0,255
 #define PURPLE 				255,0,255
+
+#define PWM_MAX		2047.0
 
 class RGBinterface {
 private:

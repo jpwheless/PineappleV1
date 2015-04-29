@@ -1,5 +1,9 @@
 #pragma once
 
+#include <Arduino.h>
+
+#define PWM_MAX		2047.0
+
 class LEDinterface {
 private:
 	unsigned int pin;

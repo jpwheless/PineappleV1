@@ -1,5 +1,10 @@
 #pragma once
 
+#include <Arduino.h>
+#include "LMT84LPinterface.h"
+
+#define PWM_MAX		2047.0
+
 class Heater {
 private:
 	LMT84LPinterface *thermometer;

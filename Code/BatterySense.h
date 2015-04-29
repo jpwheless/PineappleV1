@@ -1,5 +1,11 @@
 #pragma once
 
+#include <Arduino.h>
+
+#define V_REF			2.500
+#define ADC_MAX		4095.0
+#define BAT_VSNS_MULT	2.005
+
 class BatterySense {
 private:
 	static const float voltLookup[];

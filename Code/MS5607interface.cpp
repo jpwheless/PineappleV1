@@ -2,6 +2,7 @@
 
 // Return 0 for no measurement, 1 for temperature, 2 for pressure
 unsigned int MS5607interface::read() {
+	static elapsedMicros timeSinceConv = 0;
 	static bool whichMeas = 0; // If 1, pressure.  If 0, temperature.
 
 	// ADC in MS5607 takes about 9.04ms max to complete comversion at 4096 OSR
@@ -65,7 +66,6 @@ bool MS5607interface::init(uint8_t addr) {
 	Wire.beginTransmission(address);
   Wire.write(MS5607_TCONV);
   if (Wire.endTransmission()) return false;
-  timeSinceConv = 0;
 
   measComplete = false;
 

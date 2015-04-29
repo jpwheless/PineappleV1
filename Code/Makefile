@@ -73,9 +73,9 @@ LIBPATH = $(MAINPATH)/libraries
 
 # CPPFLAGS = compiler options for C and C++
 CPPFLAGS = -Wall -g -Os -mcpu=cortex-m4 -mthumb -nostdlib -MMD $(OPTIONS) -I. -I$(BUILDPATH) -I$(LIBPATH)
-CPPFLAGS += -I$(LIBPATH)/SdFat
-CPPFLAGS += -I$(LIBPATH)/EEPROM
-CPPFLAGS += -I$(LIBPATH)/i2c_t3
+#CPPFLAGS += -I$(LIBPATH)/SdFat
+#CPPFLAGS += -I$(LIBPATH)/EEPROM
+#CPPFLAGS += -I$(LIBPATH)/i2c_t3
 
 # compiler options for C++ only
 CXXFLAGS = -std=gnu++0x -felide-constructors -fno-exceptions -fno-rtti

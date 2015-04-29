@@ -1,6 +1,6 @@
 #pragma once
 
-#include <EEPROM.h>
+#include "EEPROM.h"
 #include <SdFat.h>
 
 #define CSV_BUFFER_SIZE	23

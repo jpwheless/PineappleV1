@@ -45,33 +45,21 @@ using namespace std;
 #define GPO_4			22
 #define GPO_1			23
 
+#define MS5607_ADDR		0x77 // 6 MSBs of address. B111011x is complete address, with x being ~CSB
+
 ///////////////
 // Constants //
 ///////////////
-#define V_REF			2.500 // Nominal voltage of high-accuracy reference (±0.08%)
-#define ADC_MAX		4095.0
 #define ADC_RES		12
 #define PWM_RES		11
 #define PWM_MAX		2047.0
 #define PWM_FREQ	23437
 
-#define BAT_VSNS_MULT	2.005
-
 #define PWM_A_PIN 5
 #define PWM_B_PIN 3
 #define PWM_C_PIN 25
 
-#define MS5607_ADDR		0x77 // 6 MSBs of address. B111011x is complete address, with x being ~CSB
 #define MPU9250_ADDR	0x69 // 6 MSBs of address. B111011x is complete address, with x being CSB
-
-//////////////////
-// I2C Commands //
-//////////////////
-#define MS5607_RST		0x1E
-#define MS5607_PCONV	0x48 // 4096 OSR (9.04ms)
-#define MS5607_TCONV	0x58 // 4096 OSR (9.04ms)
-#define MS5607_AREAD	0x00
-#define MS5607_PREAD	0xA0 // Address of first PROM
 
 //////////////////////
 // Global Variables //

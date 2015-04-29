@@ -1,5 +1,9 @@
 #pragma once
 
+#include <Heater.h>
+
+#define PWM_MAX		2047.0
+
 class GPOinterface {
 private:
 	unsigned int pin;
